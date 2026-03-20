@@ -180,7 +180,7 @@ You must complete each checkpoint before moving on.
 
 # Extension Ideas
 
-If you finish early, consider adding:
+If you finish early, try tackling these features:
 
 - Boss monsters
 - Win condition
