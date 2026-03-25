@@ -10,8 +10,8 @@ public class Game {
       
       // TODO: Create a Map which populates each element of the grid with a Room
       // that contains a random assortment of Monsters and Items
-      
       // TODO: Create a Player at a random location in the Map
+      Player p = new Player(100, "Hero", (int) (Math.random() * dungeonMap.getNumRows()), (int) (Math.random() * dungeonMap.getNumCols()));
       // HINT: Generate random row/column values using Math.random()
       // and pass them into the Player constructor
             
@@ -24,7 +24,8 @@ public class Game {
                 exitGame = true;
             }
             else if (input.equals("LOOK") || input.equals("SEARCH")) {
-               
+               System.out.println("Your current position is: (" + p.getCurrentX() + ", " + p.getCurrentY() + ")");
+                System.out.println(p.look(dungeonMap));
             }
             // TODO: get the player movement working correctly. It should NOT let the player
             // move beyond the boundaries of the map, and provide the user with descriptions
@@ -32,10 +33,14 @@ public class Game {
             // do this.
             else if (input.startsWith("MOVE ")) {
                String direction = input.substring(5);
-               if (direction.equals("UP")) {
-               } else if (direction.equals("DOWN")) {
-               } else if (direction.equals("LEFT")) {    
-               } else if (direction.equals("RIGHT")) {
+               if (direction.equals("UP") && !(p.getCurrentY() == 0)) {
+                  p.moveTo(p.getCurrentX(), p.getCurrentY() - 1);
+               } else if (direction.equals("DOWN") && !(p.getCurrentY() == dungeonMap.getNumRows())) {
+                  p.moveTo(p.getCurrentX(), p.getCurrentY() + 1);
+               } else if (direction.equals("LEFT") && !(p.getCurrentX() == 0)) { 
+                  p.moveTo(p.getCurrentX() - 1,  p.getCurrentY());   
+               } else if (direction.equals("RIGHT") && !(p.getCurrentX() == dungeonMap.getNumCols())) {
+                  p.moveTo(p.getCurrentX() + 1, p.getCurrentY());
                } else {
                   System.out.println("You're trying to move in an invalid direction. Please choose UP, DOWN, LEFT or RIGHT");
                }
