@@ -5,11 +5,13 @@ public class Room {
    private ArrayList<Monster> monstersInRoom;
    private final int maxNumberOfMonsters = 2;
    private final int maxNumberOfItems = 2;
+   private int itemCount;
    
    public Room() {
       // TODO: Generate a random number of monsters and items between 1 and max (inclusive)
       int numMonsters = ((int) (Math.random() * maxNumberOfMonsters)) + 1;
       int numItems = ((int) (Math.random() * maxNumberOfItems)) + 1;
+      itemCount = numItems;
       // TODO: Create the ArrayLists to hold the Items and Monsters in the Room and populate them with Monsters and Items
       monstersInRoom = new ArrayList<Monster>();
       for (numMonsters = numMonsters; numMonsters > 0; numMonsters--) {
@@ -20,7 +22,15 @@ public class Room {
          itemsInRoom.add(new Item());
       }
    }
-   
+    public String findItem(String input) {
+      for (int i = 0; i < itemCount; i++) {
+         if (input.equals(itemsInRoom.get(i))) {
+            itemsInRoom.remove(i);
+            return "Picked up " + input;
+         }
+      }
+      return "That is not an item in this room";
+   }
    public String toString() {
       String returnString = "Items in room: \n   ";
       for (Item item : itemsInRoom) {

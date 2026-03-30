@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class Game {   
+   
+      
    public static void main(String[] args) {
       boolean exitGame = false;
       Game game = new Game();
@@ -14,6 +16,7 @@ public class Game {
       Player p = new Player(100, "Hero", (int) (Math.random() * dungeonMap.getNumRows()), (int) (Math.random() * dungeonMap.getNumCols()));
       // HINT: Generate random row/column values using Math.random()
       // and pass them into the Player constructor
+
             
       while (exitGame != true) {
             System.out.print("Enter command: ");
@@ -26,6 +29,10 @@ public class Game {
             else if (input.equals("LOOK") || input.equals("SEARCH")) {
                System.out.println("Your current position is: (" + p.getCurrentX() + ", " + p.getCurrentY() + ")");
                 System.out.println(p.look(dungeonMap));
+            }
+            else if (input.startsWith("PICK UP ")) {
+               String item = input.substring(8);
+               System.out.println(p.getRoom(dungeonMap).findItem(item));
             }
             // TODO: get the player movement working correctly. It should NOT let the player
             // move beyond the boundaries of the map, and provide the user with descriptions
