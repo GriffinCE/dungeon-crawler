@@ -31,17 +31,21 @@ public class Map {
       // TODO: return the Room that is at the row and column that are passed
       return roomGrid[row][column];
    }
-   
+   public Item collectItem(int row, int column, String input) {
+      return roomGrid[row][column].findItem(input);
+   }
+   public boolean pickupItem(int row, int col) {
+      return roomGrid[row][col].getItemPickup();
+   }
+   public void dropItem(Item item, int row, int col) {
+      roomGrid[row][col].addItemToRoom(item);
+   }
    public Room getRandomRoom() {
       // TODO: This method will simply return a random room in the Map so that you can 
       // give the player a random starting point.
       int randomRow = (int) (Math.random() * getNumRows());
       int randomCol = (int) (Math.random() * getNumCols());
       return roomGrid[randomRow][randomCol];
-   }
-   public static void main(String[] args) {
-      Map map = new Map(5, 6);
-      System.out.println(map.getRoom(2, 3));
    }
 }
   

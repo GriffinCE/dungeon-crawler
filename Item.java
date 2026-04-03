@@ -28,9 +28,21 @@ public class Item {
       // TODO: Pick a random item type from itemTypes
       itemType = itemTypes[(int) (Math.random() * itemTypes.length)];
    }
+   public Item(int item) {
+      itemType = itemTypes[item];
+   }
    
    public String getItemType() {
       return this.itemType;
+   }
+   public Item getItem(String input) {
+      for (int i = 0; i < itemTypes.length; i++) {
+         if (itemTypes[i].equals(input)) {
+            Item random = new Item(i);
+            return random;
+         }
+      }
+      return null;
    }
    
    public String toString() {

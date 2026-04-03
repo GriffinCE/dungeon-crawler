@@ -32,8 +32,18 @@ public class Game {
             }
             else if (input.startsWith("PICK UP ")) {
                String item = input.substring(8);
-               System.out.println(p.getRoom(dungeonMap).findItem(item));
+               p.addItemToInventory(p.collectItem(item, dungeonMap));
+               if (p.pickupItem(dungeonMap) == true) {
+                  System.out.println("Picked up item");
+                  
+               } else {
+                  System.out.println("That is not an item that you can pick up. Please try an item that is in the room.");
+               }
             }
+            else if (input.equals("OPEN INVENTORY") || input.equals("LOOK IN INVENTORY")) {
+               p.printInventory();
+            }
+
             // TODO: get the player movement working correctly. It should NOT let the player
             // move beyond the boundaries of the map, and provide the user with descriptions
             // of what is happening. You'll have to change the if/else/if statements here to 
@@ -42,12 +52,16 @@ public class Game {
                String direction = input.substring(5);
                if (direction.equals("UP") && !(p.getCurrentY() == 0)) {
                   p.moveTo(p.getCurrentX(), p.getCurrentY() - 1);
-               } else if (direction.equals("DOWN") && !(p.getCurrentY() == dungeonMap.getNumRows())) {
+                  System.out.println("You enter a new room");
+               } else if (direction.equals("DOWN") && !(p.getCurrentY() == dungeonMap.getNumCols() - 1)) {
                   p.moveTo(p.getCurrentX(), p.getCurrentY() + 1);
+                  System.out.println("You enter a new room");
                } else if (direction.equals("LEFT") && !(p.getCurrentX() == 0)) { 
-                  p.moveTo(p.getCurrentX() - 1,  p.getCurrentY());   
-               } else if (direction.equals("RIGHT") && !(p.getCurrentX() == dungeonMap.getNumCols())) {
+                  p.moveTo(p.getCurrentX() - 1,  p.getCurrentY());
+                  System.out.println("You enter a new room");
+               } else if (direction.equals("RIGHT") && !(p.getCurrentX() == dungeonMap.getNumRows() -  1)) {
                   p.moveTo(p.getCurrentX() + 1, p.getCurrentY());
+                  System.out.println("You enter a new room");
                } else {
                   System.out.println("You're trying to move in an invalid direction. Please choose UP, DOWN, LEFT or RIGHT");
                }

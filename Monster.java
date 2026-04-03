@@ -37,8 +37,4 @@ private String monsterType;
       // TODO: Build a descriptive String for use by other methods
       return getMonsterType();
    }
-   public static void main(String[] args) {
-      Monster m = new Monster();
-      System.out.println(m);
-   }
 }

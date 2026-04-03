@@ -6,6 +6,8 @@ public class Room {
    private final int maxNumberOfMonsters = 2;
    private final int maxNumberOfItems = 2;
    private int itemCount;
+   private Item inventoryItem;
+   private boolean itemPickup;
    
    public Room() {
       // TODO: Generate a random number of monsters and items between 1 and max (inclusive)
@@ -22,14 +24,29 @@ public class Room {
          itemsInRoom.add(new Item());
       }
    }
-    public String findItem(String input) {
+    public Item findItem(String input) {
+      Item returnItem = null;
+      itemPickup = false;
+      itemCount = itemsInRoom.size();
       for (int i = 0; i < itemCount; i++) {
-         if (input.equals(itemsInRoom.get(i))) {
+         if (itemsInRoom.get(i).getItemType().equals(input)) {
+            inventoryItem = itemsInRoom.get(i);
             itemsInRoom.remove(i);
-            return "Picked up " + input;
+            itemPickup = true;
+            itemCount--;
+            return inventoryItem;
          }
       }
-      return "That is not an item in this room";
+      return returnItem;
+   }
+   public Item getInventoryItem() {
+      return inventoryItem;
+   }
+   public boolean getItemPickup() {
+      return itemPickup;
+   }
+   public void addItemToRoom(Item item) {
+      itemsInRoom.add(item);
    }
    public String toString() {
       String returnString = "Items in room: \n   ";
